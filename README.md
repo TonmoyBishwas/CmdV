@@ -96,6 +96,8 @@ Releases are cut with `./scripts/release.sh <version>` (see [scripts/](scripts/)
 - `UI/Shelf/` — non-activating `NSPanel` hosting the SwiftUI glass shelf; the target app keeps focus while you type to search
 - Only third-party dependency: [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts)
 
+Full architecture docs live in [docs/CODEBASE.md](docs/CODEBASE.md), with known development traps in [docs/PITFALLS.md](docs/PITFALLS.md) and the plan ahead in [docs/ROADMAP.md](docs/ROADMAP.md).
+
 ## License
 
 [GPL-3.0](LICENSE) — free forever. Contributions welcome!
