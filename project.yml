@@ -1,0 +1,61 @@
+name: CmdV
+options:
+  bundleIdPrefix: com.tonmoybishwas
+  deploymentTarget:
+    macOS: "26.0"
+  createIntermediateGroups: true
+packages:
+  KeyboardShortcuts:
+    url: https://github.com/sindresorhus/KeyboardShortcuts
+    from: 2.3.0
+settings:
+  base:
+    ARCHS: arm64
+    SWIFT_VERSION: "6.0"
+    MACOSX_DEPLOYMENT_TARGET: "26.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGN_STYLE: Manual
+    DEVELOPMENT_TEAM: ""
+    ENABLE_HARDENED_RUNTIME: YES
+    SWIFT_STRICT_CONCURRENCY: complete
+    DEAD_CODE_STRIPPING: YES
+targets:
+  CmdV:
+    type: application
+    platform: macOS
+    sources: [CmdV]
+    dependencies:
+      - package: KeyboardShortcuts
+    info:
+      path: CmdV/Info.plist
+      properties:
+        CFBundleDisplayName: CmdV
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        LSUIElement: true
+        LSMinimumSystemVersion: "26.0"
+        LSApplicationCategoryType: public.app-category.productivity
+        NSHumanReadableCopyright: "GPL-3.0 — CmdV contributors"
+    entitlements:
+      path: CmdV/CmdV.entitlements
+      properties: {}
+  CmdVTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [CmdVTests]
+    dependencies:
+      - target: CmdV
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/CmdV.app/Contents/MacOS/CmdV"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+schemes:
+  CmdV:
+    build:
+      targets:
+        CmdV: all
+        CmdVTests: [test]
+    test:
+      targets: [CmdVTests]

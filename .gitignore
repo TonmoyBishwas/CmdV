@@ -1,0 +1,22 @@
+# Build artifacts
+build/
+dist/
+DerivedData/
+*.xcarchive
+
+# Xcode user state
+xcuserdata/
+*.xcuserstate
+
+# SwiftPM
+.build/
+.swiftpm/
+
+# Local overrides
+local.xcconfig
+
+# macOS
+.DS_Store
+
+# Logs
+*.log

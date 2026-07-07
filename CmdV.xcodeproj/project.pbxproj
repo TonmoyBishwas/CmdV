@@ -1,0 +1,459 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2EA0B4BE6678C80906FB6EC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B65D76153DF7713759D5339 /* AppDelegate.swift */; };
+		3646ECEA24DC87A94B29DC9D /* CmdVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F162EEB11CC9F3E297B3CD5A /* CmdVApp.swift */; };
+		6F26757E0F869E16ABF4FB01 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 094182B040AC90B7E9F4C3B9 /* KeyboardShortcuts */; };
+		99826085A3B84C1F1B913491 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C581D28E1578949CA583C7CF /* SmokeTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D7207A694496FF8E9E84F78C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F946E50DE0705BE105991BA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADBF78BBF02CE97815E11ED1;
+			remoteInfo = CmdV;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		462F4376EE8F71F28E1FFEAF /* CmdVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CmdVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B65D76153DF7713759D5339 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7C3061FEE10D326329FAF68E /* CmdV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CmdV.entitlements; sourceTree = "<group>"; };
+		9E548DBBB8E4582EE4589E01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C581D28E1578949CA583C7CF /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
+		CF26BB83B4EBEC02EDB0F52E /* CmdV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CmdV.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F162EEB11CC9F3E297B3CD5A /* CmdVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmdVApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		23B06DA26672C19D1F24DEC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F26757E0F869E16ABF4FB01 /* KeyboardShortcuts in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1EEB3B6C0DB99E4F5E73C8BE = {
+			isa = PBXGroup;
+			children = (
+				EB5C665710FC2278516EE299 /* CmdV */,
+				97C9059ECA2CCE8938002619 /* CmdVTests */,
+				C0D24693F2199871F29AC517 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		97C9059ECA2CCE8938002619 /* CmdVTests */ = {
+			isa = PBXGroup;
+			children = (
+				C581D28E1578949CA583C7CF /* SmokeTests.swift */,
+			);
+			path = CmdVTests;
+			sourceTree = "<group>";
+		};
+		A3D17FE8877E9E16631C5379 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5B65D76153DF7713759D5339 /* AppDelegate.swift */,
+				F162EEB11CC9F3E297B3CD5A /* CmdVApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C0D24693F2199871F29AC517 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF26BB83B4EBEC02EDB0F52E /* CmdV.app */,
+				462F4376EE8F71F28E1FFEAF /* CmdVTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB5C665710FC2278516EE299 /* CmdV */ = {
+			isa = PBXGroup;
+			children = (
+				7C3061FEE10D326329FAF68E /* CmdV.entitlements */,
+				9E548DBBB8E4582EE4589E01 /* Info.plist */,
+				A3D17FE8877E9E16631C5379 /* App */,
+			);
+			path = CmdV;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ADBF78BBF02CE97815E11ED1 /* CmdV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21CA6E5D8AEDBD5171A64C63 /* Build configuration list for PBXNativeTarget "CmdV" */;
+			buildPhases = (
+				CF05744FB00B2DE61A296E7F /* Sources */,
+				23B06DA26672C19D1F24DEC9 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CmdV;
+			packageProductDependencies = (
+				094182B040AC90B7E9F4C3B9 /* KeyboardShortcuts */,
+			);
+			productName = CmdV;
+			productReference = CF26BB83B4EBEC02EDB0F52E /* CmdV.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FD3BD632B0E6D1B1878485C5 /* CmdVTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 19BF642056BC9030D03B115F /* Build configuration list for PBXNativeTarget "CmdVTests" */;
+			buildPhases = (
+				DFF7D8F0D45BB7CD23BC1552 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5B4AD4396BBCC2AB30DFA96D /* PBXTargetDependency */,
+			);
+			name = CmdVTests;
+			packageProductDependencies = (
+			);
+			productName = CmdVTests;
+			productReference = 462F4376EE8F71F28E1FFEAF /* CmdVTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7F946E50DE0705BE105991BA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					ADBF78BBF02CE97815E11ED1 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+					FD3BD632B0E6D1B1878485C5 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = C5EB8B271CA2CF47D78513CE /* Build configuration list for PBXProject "CmdV" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 1EEB3B6C0DB99E4F5E73C8BE;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3215AD5E01608FB3624CD70C /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C0D24693F2199871F29AC517 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ADBF78BBF02CE97815E11ED1 /* CmdV */,
+				FD3BD632B0E6D1B1878485C5 /* CmdVTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CF05744FB00B2DE61A296E7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EA0B4BE6678C80906FB6EC9 /* AppDelegate.swift in Sources */,
+				3646ECEA24DC87A94B29DC9D /* CmdVApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFF7D8F0D45BB7CD23BC1552 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99826085A3B84C1F1B913491 /* SmokeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5B4AD4396BBCC2AB30DFA96D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADBF78BBF02CE97815E11ED1 /* CmdV */;
+			targetProxy = D7207A694496FF8E9E84F78C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		14F22D0DBC1058E1D5C2B83C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CmdV/CmdV.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CmdV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonmoybishwas.CmdV;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1801F8E25885235E67DB5216 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonmoybishwas.CmdVTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CmdV.app/Contents/MacOS/CmdV";
+			};
+			name = Release;
+		};
+		6E6D6A4F9271B356CA18B140 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonmoybishwas.CmdVTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CmdV.app/Contents/MacOS/CmdV";
+			};
+			name = Debug;
+		};
+		7AFD071EEB8C34F5F5A195EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		B8D6352CC6C8E71611FB4D0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CmdV/CmdV.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CmdV/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonmoybishwas.CmdV;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D1BFF65F1640033769EDEDB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		19BF642056BC9030D03B115F /* Build configuration list for PBXNativeTarget "CmdVTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E6D6A4F9271B356CA18B140 /* Debug */,
+				1801F8E25885235E67DB5216 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		21CA6E5D8AEDBD5171A64C63 /* Build configuration list for PBXNativeTarget "CmdV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14F22D0DBC1058E1D5C2B83C /* Debug */,
+				B8D6352CC6C8E71611FB4D0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C5EB8B271CA2CF47D78513CE /* Build configuration list for PBXProject "CmdV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AFD071EEB8C34F5F5A195EB /* Debug */,
+				D1BFF65F1640033769EDEDB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3215AD5E01608FB3624CD70C /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		094182B040AC90B7E9F4C3B9 /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3215AD5E01608FB3624CD70C /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 7F946E50DE0705BE105991BA /* Project object */;
+}
