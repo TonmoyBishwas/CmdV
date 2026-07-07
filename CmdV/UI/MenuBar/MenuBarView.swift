@@ -32,6 +32,10 @@ struct MenuBarView: View {
             confirmClearHistory()
         }
         Divider()
+        SettingsLink {
+            Text("Settings…")
+        }
+        .keyboardShortcut(",")
         Button("About CmdV") {
             NSApp.orderFrontStandardAboutPanel(nil)
         }

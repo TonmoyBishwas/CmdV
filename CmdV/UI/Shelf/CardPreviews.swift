@@ -38,20 +38,7 @@ struct CardPreview: View {
     }
 
     private var linkPreview: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: 6) {
-                Image(systemName: "globe")
-                    .foregroundStyle(.tint)
-                Text(URL(string: item.plainText ?? "")?.host() ?? "Link")
-                    .font(.callout.weight(.semibold))
-                    .lineLimit(1)
-            }
-            Text(item.plainText ?? "")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .lineLimit(4)
-        }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
+        LinkCardPreview(urlString: item.plainText ?? "")
     }
 
     private var colorPreview: some View {
@@ -83,6 +70,42 @@ struct CardPreview: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    fileprivate struct LinkCardPreview: View {
+        let urlString: String
+        @State private var metadata: LinkMetadataCache.Metadata?
+
+        var body: some View {
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 6) {
+                    if let data = metadata?.iconData, let icon = NSImage(data: data) {
+                        Image(nsImage: icon)
+                            .resizable()
+                            .frame(width: 16, height: 16)
+                            .clipShape(.rect(cornerRadius: 3))
+                    } else {
+                        Image(systemName: "globe")
+                            .foregroundStyle(.tint)
+                    }
+                    Text(metadata?.title ?? URL(string: urlString)?.host() ?? "Link")
+                        .font(.callout.weight(.semibold))
+                        .lineLimit(2)
+                }
+                Text(urlString)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(3)
+            }
+            .frame(maxWidth: .infinity, alignment: .topLeading)
+            .task(id: urlString) {
+                if let hit = LinkMetadataCache.shared.cached(for: urlString) {
+                    metadata = hit
+                } else {
+                    metadata = await LinkMetadataCache.shared.fetch(urlString: urlString)
+                }
+            }
+        }
     }
 
     private var filePreview: some View {

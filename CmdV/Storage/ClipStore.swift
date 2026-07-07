@@ -73,6 +73,15 @@ actor ClipStore {
         modelContext.insert(item)
         saveQuietly()
         prune()
+
+        // OCR runs after insert so search catches up moments later.
+        if let imageData = capture.imageData {
+            Task {
+                if let text = await OCRService.recognizeText(in: imageData) {
+                    self.setOCRText(uuid: uuid, text: text)
+                }
+            }
+        }
     }
 
     /// Create a text item authored inside CmdV (⌘N).

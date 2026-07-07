@@ -15,5 +15,8 @@ struct CmdVApp: App {
         MenuBarExtra("CmdV", systemImage: appState.isPaused ? "clipboard.fill" : "clipboard") {
             MenuBarView(appState: appState)
         }
+        Settings {
+            SettingsView(appState: appState)
+        }
     }
 }
