@@ -239,17 +239,35 @@ struct PinboardMenu: View {
     }
 }
 
-/// Transferable payload for dragging cards out into other apps.
+/// Transferable payload for dragging cards out into other apps:
+/// files drag as file URLs, images as PNG data, everything else as text.
 struct DraggableClip: Transferable {
     let text: String
+    let fileURL: URL?
+    let imageData: Data?
 
+    @MainActor
     init(item: ClipItem) {
         self.text = item.plainText ?? ""
+        self.fileURL = item.kind == .file
+            ? item.fileURLPaths.first.map { URL(fileURLWithPath: $0) }
+            : nil
+        if item.kind == .image, let name = item.imageFileName {
+            self.imageData = try? Data(contentsOf: ImageFileStore.default().url(forFileName: name))
+        } else {
+            self.imageData = nil
+        }
     }
 
     static var transferRepresentation: some TransferRepresentation {
+        ProxyRepresentation(exporting: \.exportURL)
+            .exportingCondition { $0.fileURL != nil }
+        DataRepresentation(exportedContentType: .png) { $0.imageData ?? Data() }
+            .exportingCondition { $0.imageData != nil }
         ProxyRepresentation(exporting: \.text)
     }
+
+    private var exportURL: URL { fileURL ?? URL(fileURLWithPath: "/") }
 }
 
 import SwiftData

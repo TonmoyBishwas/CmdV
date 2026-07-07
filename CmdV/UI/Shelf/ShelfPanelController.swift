@@ -206,6 +206,11 @@ final class ShelfPanelController: NSObject, NSWindowDelegate {
 
         if command, let chars = event.charactersIgnoringModifiers?.lowercased() {
             switch chars {
+            case "c":
+                if let uuid = viewModel.selectedUUID {
+                    appState.copyItem(uuid: uuid)
+                }
+                return nil
             case "f":
                 viewModel.searchFocusRequested = true
                 return nil

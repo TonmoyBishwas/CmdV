@@ -52,6 +52,38 @@ enum PasteEngine {
         log.debug("Copied item \(item.uuid, privacy: .public) (plain: \(plainTextOnly))")
     }
 
+    // MARK: - Snapshot / restore (optional "restore clipboard after paste")
+
+    typealias PasteboardSnapshot = [[String: Data]]
+
+    /// Captures the current pasteboard contents so they can be restored
+    /// after CmdV pastes an item.
+    static func snapshot() -> PasteboardSnapshot {
+        (NSPasteboard.general.pasteboardItems ?? []).map { item in
+            var entry: [String: Data] = [:]
+            for type in item.types {
+                if let data = item.data(forType: type) {
+                    entry[type.rawValue] = data
+                }
+            }
+            return entry
+        }
+    }
+
+    static func restore(_ snapshot: PasteboardSnapshot, monitor: ClipboardMonitor) {
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        let items = snapshot.map { entry in
+            let item = NSPasteboardItem()
+            for (type, data) in entry {
+                item.setData(data, forType: NSPasteboard.PasteboardType(type))
+            }
+            return item
+        }
+        pasteboard.writeObjects(items)
+        monitor.expectSelfCopy(changeCount: pasteboard.changeCount)
+    }
+
     /// Copies several items joined as text (multi-select paste).
     static func copyMultiple(
         _ items: [ClipItem],

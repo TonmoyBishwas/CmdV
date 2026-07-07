@@ -80,10 +80,9 @@ final class AppState {
                 .filter { model.multiSelection.contains($0) }
                 .compactMap { item(uuid: $0) }
             guard !items.isEmpty else { return }
+            let snapshot = Defaults.restoreClipboardAfterPaste ? PasteEngine.snapshot() : nil
             PasteEngine.copyMultiple(items, plainTextOnly: plainTextOnly, monitor: monitor)
-            shelf.hideAndFocusPreviousApp {
-                KeySimulator.pasteIfTrusted()
-            }
+            performPaste(restoring: snapshot)
             return
         }
         guard let uuid = model.selectedUUID else { return }
@@ -92,9 +91,20 @@ final class AppState {
 
     func pasteItem(uuid: UUID, plainTextOnly: Bool) {
         guard let item = item(uuid: uuid) else { return }
+        let snapshot = Defaults.restoreClipboardAfterPaste ? PasteEngine.snapshot() : nil
         PasteEngine.copy(item, plainTextOnly: plainTextOnly, monitor: monitor)
-        shelf.hideAndFocusPreviousApp {
-            KeySimulator.pasteIfTrusted()
+        performPaste(restoring: snapshot)
+    }
+
+    private func performPaste(restoring snapshot: PasteEngine.PasteboardSnapshot?) {
+        shelf.hideAndFocusPreviousApp { [monitor] in
+            let pasted = KeySimulator.pasteIfTrusted()
+            if let snapshot, pasted {
+                // Give the target app time to consume the pasteboard first.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    PasteEngine.restore(snapshot, monitor: monitor)
+                }
+            }
         }
     }
 
