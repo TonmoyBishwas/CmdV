@@ -7,6 +7,9 @@ struct MenuBarView: View {
         Button("Open CmdV") {
             appState.toggleShelf()
         }
+        Button("Start Paste Stack") {
+            appState.pasteStack?.toggle()
+        }
         Divider()
         if appState.isPaused {
             Button("Resume Capturing") {

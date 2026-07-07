@@ -52,6 +52,28 @@ enum PasteEngine {
         log.debug("Copied item \(item.uuid, privacy: .public) (plain: \(plainTextOnly))")
     }
 
+    /// Writes a raw capture (Paste Stack entries) back to the pasteboard.
+    static func copyCapture(_ capture: ClipboardCapture, monitor: ClipboardMonitor) {
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        if !capture.fileURLs.isEmpty {
+            pasteboard.writeObjects(capture.fileURLs.map { $0 as NSURL })
+        } else if let image = capture.imageData {
+            pasteboard.setData(image, forType: capture.imageIsPNG ? .png : .tiff)
+        } else {
+            if let rtf = capture.rtfData {
+                pasteboard.setData(rtf, forType: .rtf)
+            }
+            if let html = capture.htmlString {
+                pasteboard.setString(html, forType: .html)
+            }
+            if let text = capture.plainText {
+                pasteboard.setString(text, forType: .string)
+            }
+        }
+        monitor.expectSelfCopy(changeCount: pasteboard.changeCount)
+    }
+
     // MARK: - Snapshot / restore (optional "restore clipboard after paste")
 
     typealias PasteboardSnapshot = [[String: Data]]

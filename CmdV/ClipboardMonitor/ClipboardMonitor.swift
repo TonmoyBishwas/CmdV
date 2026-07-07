@@ -12,6 +12,9 @@ final class ClipboardMonitor {
     /// Change counts CmdV produced itself (via PasteEngine) — never recorded.
     private var expectedChangeCounts: Set<Int> = []
 
+    /// Invoked for every recorded capture (Paste Stack feeds off this).
+    var onCapture: ((ClipboardCapture) -> Void)?
+
     /// When non-nil and in the future, capture is paused.
     var pausedUntil: Date?
     /// Paused indefinitely (until manually resumed).
@@ -96,6 +99,7 @@ final class ClipboardMonitor {
         guard let capture = read(pasteboard: pasteboard, types: types, source: source) else {
             return
         }
+        onCapture?(capture)
         Task {
             await store.ingest(capture)
         }

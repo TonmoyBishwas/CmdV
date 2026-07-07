@@ -14,6 +14,7 @@ final class AppState {
     let store: ClipStore
     let monitor: ClipboardMonitor
     private(set) var shelf: ShelfPanelController!
+    private(set) var pasteStack: PasteStackController!
 
     /// Mirrored pause state for menu/UI display.
     var isPaused = false
@@ -35,9 +36,16 @@ final class AppState {
 
     func start() {
         guard !isRunningTests else { return }
+        pasteStack = PasteStackController(monitor: monitor)
+        monitor.onCapture = { [weak self] capture in
+            self?.pasteStack.noteCapture(capture)
+        }
         monitor.start()
         KeyboardShortcuts.onKeyDown(for: .openShelf) { [weak self] in
             self?.shelf.toggle()
+        }
+        KeyboardShortcuts.onKeyDown(for: .pasteStack) { [weak self] in
+            self?.pasteStack.toggle()
         }
         ScriptingHooks.install(appState: self)
     }
