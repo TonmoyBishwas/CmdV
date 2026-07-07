@@ -1,41 +1,101 @@
+<div align="center">
+
+<img src="CmdV/Assets.xcassets/AppIcon.appiconset/icon_256x256.png" width="128" alt="CmdV icon">
+
 # CmdV
 
-**A free, open-source clipboard manager for macOS — with the Liquid Glass look.**
+**A free, open-source clipboard manager for macOS — with the native Liquid Glass look.**
 
-CmdV keeps everything you copy — text, links, images, files, colors, code — and lets you find it and paste it again in seconds. It's a lightweight, privacy-respecting alternative to paid clipboard managers, built natively for Apple Silicon Macs running macOS 26 (Tahoe) or later.
+[![CI](https://github.com/TonmoyBishwas/CmdV/actions/workflows/ci.yml/badge.svg)](https://github.com/TonmoyBishwas/CmdV/actions/workflows/ci.yml)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
+[![macOS 26+](https://img.shields.io/badge/macOS-26%2B-black)](#requirements)
+[![Apple Silicon](https://img.shields.io/badge/Apple%20Silicon-arm64-orange)](#requirements)
 
-> 🚧 **Work in progress** — v1.0 is under active development.
+</div>
 
-## Features (v1.0 goals)
+CmdV remembers everything you copy — text, links, images, files, colors, code — and lets you find it and paste it again in seconds. Press **⇧⌘V** anywhere and a glass shelf slides up from the bottom of your screen with your entire clipboard history.
 
-- 📋 **Automatic clipboard history** — nothing you copy is ever lost
-- 🔍 **Instant search** — just start typing; filter by type, app, or date
-- 🗂 **Pinboards** — save snippets, templates, and links permanently
-- 📚 **Paste Stack** — queue up copies, then paste them back one by one
-- ⌨️ **Quick Paste** — ⌘1–⌘9 pastes any visible item instantly
-- 🔒 **Privacy first** — passwords are never recorded; exclude any app; everything stays on your Mac
-- 🪟 **Liquid Glass UI** — a native macOS 26 glass shelf that slides up from the bottom of your screen
+It's a lightweight, privacy-respecting, completely free alternative to paid clipboard managers like Paste. No subscription, no account, no cloud, no analytics. Everything stays on your Mac.
+
+## Features
+
+### 📋 Unlimited clipboard history
+Everything you copy is captured automatically and classified by type — plain and rich text, links, images, files, colors, and code — each with its own card preview, source-app icon, and timestamp.
+
+### 🔍 Instant search & filters
+Open the shelf and just start typing. Search covers item text, titles, file names, source apps — and even **text inside screenshots**, thanks to fully on-device OCR (Apple Vision). Filter by content type with one click.
+
+### 📚 Paste Stack
+Press **⇧⌘C** to start a stack, copy a bunch of things from anywhere, then press **⌘V** repeatedly to paste them back **in order** — perfect for filling forms or assembling a document from many sources. Reverse the order or drop entries anytime.
+
+### 📌 Pinboards
+Keep templates, snippets, and links forever, organized into named, colored pinboards (⇧⌘N). Pinned items never expire, no matter your history settings.
+
+### ⌨️ Keyboard-first
+| Shortcut | Action |
+|---|---|
+| ⇧⌘V | Open / close the shelf (customizable) |
+| ← → | Browse items |
+| Return | Paste at cursor |
+| ⇧Return | Paste as plain text |
+| ⌘1 – ⌘9 | Quick-paste a visible card |
+| Space | Quick Look preview |
+| ⌘F <em>or just type</em> | Search |
+| ⌘R / ⌘E | Rename / edit an item |
+| ⌘N / ⇧⌘N | New text item / new pinboard |
+| ⇧⌘C | Start / stop the Paste Stack |
+| ⌘T | Pause / resume capturing (menu bar) |
+| Delete | Remove item |
+
+Plus: double-click to paste, drag cards out into any app, ⌘/⇧-click multi-select, right-click context menus.
+
+### 🔒 Privacy by design
+- Copies from password managers are **never recorded** (CmdV honors the [concealed/transient pasteboard conventions](http://nspasteboard.org))
+- Add any app to the **ignore list** — nothing copied there is saved
+- **Pause capturing** for 5 minutes, 30 minutes, an hour, or until you resume
+- Configurable history retention (1 day → forever, 100 → unlimited items)
+- 100% local: no network calls except optional link previews, no telemetry, ever
+
+### 🪟 Liquid Glass UI
+Built natively for macOS 26 (Tahoe) with SwiftUI's glass effect APIs — a floating glass shelf that never steals focus from the app you're pasting into.
 
 ## Requirements
 
-- Apple Silicon Mac (M1 or later)
+- Apple Silicon Mac (M1 or newer)
 - macOS 26.0 (Tahoe) or later
 
 ## Install
 
-Download the latest `.dmg` from [Releases](https://github.com/TonmoyBishwas/CmdV/releases), drag **CmdV** to Applications, then **right-click → Open** the first time (CmdV is a free open-source app and isn't notarized by Apple).
+1. Download the latest `CmdV-x.y.z.dmg` from **[Releases](https://github.com/TonmoyBishwas/CmdV/releases)**.
+2. Open it and drag **CmdV** into **Applications**.
+3. First launch: **right-click CmdV → Open → Open**. macOS shows a warning because CmdV is a free open-source app and isn't notarized by Apple — this is expected and only happens once.
+4. Grant **Accessibility** permission when prompted (System Settings → Privacy & Security → Accessibility) so CmdV can paste directly at your cursor. Without it CmdV still works: it copies the item and you press ⌘V yourself.
+
+> After updating to a new version you may need to re-grant Accessibility (remove and re-add CmdV in the list).
 
 ## Build from source
 
 ```sh
 git clone https://github.com/TonmoyBishwas/CmdV.git
 cd CmdV
-make build   # or open CmdV.xcodeproj in Xcode 26+
-make run
+make build && make run     # or open CmdV.xcodeproj in Xcode 26+
+make test                  # run the unit tests
 ```
 
-Regenerate the Xcode project after adding/removing files: `brew install xcodegen && make gen`.
+After adding/removing source files, regenerate the Xcode project: `brew install xcodegen && make gen`.
+
+Releases are cut with `./scripts/release.sh <version>` (see [scripts/](scripts/)).
+
+## Architecture (for contributors)
+
+- **Swift 6** (strict concurrency), SwiftUI + targeted AppKit, **SwiftData** storage
+- `ClipboardMonitor/` — polls `NSPasteboard.changeCount` (macOS has no clipboard notification API), with an ordered privacy gate (self-copy → concealed types → ignored apps)
+- `Storage/` — `ClipStore` @ModelActor is the single writer; images live on disk, thumbnails in the store; retention pruning spares pinned items
+- `PasteEngine/` — pasteboard writes + synthetic ⌘V via CGEvent (Accessibility-gated, copy-only fallback)
+- `PasteStack/` — queue mode that claims ⌘V through a temporary hotkey (no Input Monitoring needed)
+- `UI/Shelf/` — non-activating `NSPanel` hosting the SwiftUI glass shelf; the target app keeps focus while you type to search
+- Only third-party dependency: [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts)
 
 ## License
 
-[GPL-3.0](LICENSE)
+[GPL-3.0](LICENSE) — free forever. Contributions welcome!
