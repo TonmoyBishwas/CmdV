@@ -166,6 +166,18 @@ actor ClipStore {
         saveQuietly()
     }
 
+    /// Pins an item to the most recently created pinboard (used right after
+    /// "New Pinboard…" from an item's context menu).
+    func pinToNewestPinboard(itemUUID: UUID) {
+        var descriptor = FetchDescriptor<Pinboard>(sortBy: [SortDescriptor(\.sortOrder, order: .reverse)])
+        descriptor.fetchLimit = 1
+        guard let board = try? modelContext.fetch(descriptor).first,
+              let item = fetch(uuid: itemUUID)
+        else { return }
+        item.pinboard = board
+        saveQuietly()
+    }
+
     func pin(itemUUID: UUID, toPinboard pinboardUUID: UUID?) {
         guard let item = fetch(uuid: itemUUID) else { return }
         if let pinboardUUID {

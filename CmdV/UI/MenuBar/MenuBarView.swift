@@ -4,6 +4,10 @@ struct MenuBarView: View {
     @Bindable var appState: AppState
 
     var body: some View {
+        Button("Open CmdV") {
+            appState.toggleShelf()
+        }
+        Divider()
         if appState.isPaused {
             Button("Resume Capturing") {
                 appState.togglePause()
