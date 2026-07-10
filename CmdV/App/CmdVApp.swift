@@ -12,11 +12,13 @@ struct CmdVApp: App {
     }
 
     var body: some Scene {
-        MenuBarExtra("CmdV", systemImage: appState.isPaused ? "clipboard.fill" : "clipboard") {
-            MenuBarView(appState: appState)
-        }
-        Settings {
-            SettingsView(appState: appState)
+        // The real status item is AppKit-managed (StatusItemController) so a
+        // click, press-and-hold, and right-click can be told apart — which
+        // MenuBarExtra cannot do. SwiftUI requires at least one scene, so keep
+        // a never-inserted placeholder. Settings open through
+        // SettingsWindowController for the same reason (no SettingsLink host).
+        MenuBarExtra("CmdV", systemImage: "clipboard", isInserted: .constant(false)) {
+            EmptyView()
         }
     }
 }

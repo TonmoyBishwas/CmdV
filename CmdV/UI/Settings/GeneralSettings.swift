@@ -9,6 +9,8 @@ struct GeneralSettings: View {
     @AppStorage(Defaults.Keys.retentionDays) private var retentionDays = 30
     @AppStorage(Defaults.Keys.maxItems) private var maxItems = 1000
     @AppStorage(Defaults.Keys.restoreClipboardAfterPaste) private var restoreClipboard = false
+    @AppStorage(Defaults.Keys.menuBarPinnedCount) private var menuPinned = 5
+    @AppStorage(Defaults.Keys.menuBarRecentCount) private var menuRecent = 10
 
     var body: some View {
         Form {
@@ -45,6 +47,14 @@ struct GeneralSettings: View {
                     Text("Unlimited").tag(0)
                 }
                 Text("Pinned items are always kept, no matter these limits.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Section("Menu Bar") {
+                Stepper("Pinned items shown: \(menuPinned)", value: $menuPinned, in: 0...20)
+                Stepper("Recent items shown: \(menuRecent)", value: $menuRecent, in: 1...30)
+                Text("Click the menu bar icon for this quick copy list. Hold the click (or right-click) for the options menu.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

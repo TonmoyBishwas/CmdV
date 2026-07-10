@@ -4,7 +4,7 @@ import Quartz
 /// Spacebar Quick Look for clipboard items. Text-based items are written to
 /// a temp file so the system previewer can render them.
 @MainActor
-final class QuickLookController: NSObject, @preconcurrency QLPreviewPanelDataSource, @preconcurrency QLPreviewPanelDelegate {
+final class QuickLookController: NSObject, @preconcurrency QLPreviewPanelDataSource, QLPreviewPanelDelegate {
     static let shared = QuickLookController()
 
     private var previewURL: URL?

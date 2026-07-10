@@ -49,6 +49,9 @@ Keep templates, snippets, and links forever, organized into named, colored pinbo
 
 Plus: double-click to paste, drag cards out into any app, ⌘/⇧-click multi-select, right-click context menus.
 
+### 🖱️ Quick copy from the menu bar
+Click the clipboard icon in the menu bar for an instant list of your **pinned + most recent items** — one click copies. How many of each are shown is configurable in Settings. Hold the click (or right-click) for the options menu.
+
 ### 🔒 Privacy by design
 - Copies from password managers are **never recorded** (CmdV honors the [concealed/transient pasteboard conventions](http://nspasteboard.org))
 - Add any app to the **ignore list** — nothing copied there is saved

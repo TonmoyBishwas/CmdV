@@ -15,6 +15,8 @@ final class AppState {
     let monitor: ClipboardMonitor
     private(set) var shelf: ShelfPanelController!
     private(set) var pasteStack: PasteStackController!
+    private(set) var statusItem: StatusItemController!
+    private(set) var settingsWindow: SettingsWindowController!
 
     /// Mirrored pause state for menu/UI display.
     var isPaused = false
@@ -41,6 +43,8 @@ final class AppState {
             self?.pasteStack.noteCapture(capture)
         }
         monitor.start()
+        statusItem = StatusItemController(appState: self)
+        settingsWindow = SettingsWindowController(appState: self)
         KeyboardShortcuts.onKeyDown(for: .openShelf) { [weak self] in
             self?.shelf.toggle()
         }
@@ -65,11 +69,26 @@ final class AppState {
             monitor.pause(for: nil)
         }
         isPaused = monitor.isPaused
+        statusItem?.refreshIcon()
     }
 
     func pause(for duration: TimeInterval?) {
         monitor.pause(for: duration)
         isPaused = monitor.isPaused
+        statusItem?.refreshIcon()
+    }
+
+    /// Re-reads the monitor's pause state (a timed pause can auto-resume
+    /// without going through the methods above) and updates the icon.
+    func syncPauseState() {
+        isPaused = monitor.isPaused
+        statusItem?.refreshIcon()
+    }
+
+    // MARK: - Settings
+
+    func showSettings() {
+        settingsWindow?.show()
     }
 
     // MARK: - Item lookup (main context, UI-driven actions)

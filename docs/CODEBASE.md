@@ -39,8 +39,9 @@ Two invariants make the whole design work:
 ## Module guide
 
 ### `App/`
-- **CmdVApp.swift** — `@main`. `MenuBarExtra` (clipboard icon; filled when paused) +
-  `Settings` scene. Creates `AppState` once with a single `State(initialValue:)`.
+- **CmdVApp.swift** — `@main`. The menu bar item is AppKit-managed (see
+  `UI/MenuBar/`), so the only SwiftUI scene is a never-inserted placeholder
+  `MenuBarExtra`. Creates `AppState` once with a single `State(initialValue:)`.
 - **AppState.swift** — `@MainActor @Observable` root object owning the container, store,
   monitor, shelf controller, and paste-stack controller. `start()` is a no-op under tests
   (`isRunningTests` guard) so unit tests control all state. Every user action funnels
@@ -132,10 +133,20 @@ Two invariants make the whole design work:
   animations (the *only* place morphs are used — perf), numbered paste order, reverse
   toggle, per-entry remove.
 - **Settings** — TabView (480 pt): General (launch at login via `SMAppService.mainApp`,
-  retention pickers, restore-clipboard toggle), Privacy (Accessibility status refreshed on
-  `didBecomeActive`, ignored-apps list via NSOpenPanel), Shortcuts (recorders + cheat sheet).
-- **MenuBarView.swift** — open shelf, start stack, pause/resume (+ durations), clear
-  history (confirmed), settings, about, quit.
+  retention pickers, menu bar quick-list counts, restore-clipboard toggle), Privacy
+  (Accessibility status refreshed on `didBecomeActive`, ignored-apps list via NSOpenPanel),
+  Shortcuts (recorders + cheat sheet). Hosted by **SettingsWindowController** (plain
+  NSWindow) because with no SwiftUI menu left there is no place for `SettingsLink`,
+  and the `Settings` scene cannot be opened from AppKit.
+- **UI/MenuBar/** — **StatusItemController** owns an `NSStatusItem` (not MenuBarExtra —
+  SwiftUI cannot tell gestures apart). A plain click pops the *quick copy list*:
+  pinned + recent items (counts configurable in Settings, defaults 5/10), each with a
+  kind icon or image thumbnail; clicking one copies it. Press-and-hold (≥0.35 s,
+  tracked synchronously via `NSApp.nextEvent` in `.eventTracking` mode) or right-click
+  opens the *options menu* (open shelf, Paste Stack, pause, clear history, settings,
+  quit). Menus pop via the attach-menu-then-`performClick` pattern and detach in
+  `menuDidClose`. **QuickMenuQuery** (testable fetch split) and **QuickMenuLabel**
+  (pure one-line label derivation) back the quick list.
 
 ### `Hotkeys/`, `Support/`
 - **HotkeyDefinitions.swift** — `.openShelf` (⇧⌘V), `.pasteStack` (⇧⌘C), `.stackPaste`
@@ -160,13 +171,15 @@ Two invariants make the whole design work:
 ## Testing
 
 Swift Testing (`@Test` / `#expect`), hosted inside the app (`TEST_HOST` in project.yml —
-the app skips engine startup under tests via `isRunningTests`). 28 tests as of v1.0.0:
+the app skips engine startup under tests via `isRunningTests`). 38 tests:
 
 - `PrivacyGateTests` — all 8 ignored types (parameterized), verdict ordering, app excludes
 - `ItemClassifierTests` — color/link/code/prose tables
 - `RetentionPolicyTests` — age, cap, pinned exemption, combined
 - `PasteStackTests` — order, reverse, remove, labels, clear
-- `SmokeTests` — store round-trip on an in-memory container
+- `QuickMenuLabelTests` / `QuickMenuQueryTests` — menu bar quick list labels and the
+  pinned/recent fetch split (real in-memory SwiftData store)
+- `SmokeTests` — test target sanity
 
 Deliberately untested: UI, panel behavior, CGEvent posting (require a GUI session; verify
 those via the headless hooks in CLAUDE.md plus the user's hands).

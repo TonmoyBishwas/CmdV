@@ -10,6 +10,8 @@ enum Defaults {
         static let shelfHeight = "shelfHeight"
         static let compactMode = "compactMode"
         static let restoreClipboardAfterPaste = "restoreClipboardAfterPaste"
+        static let menuBarPinnedCount = "menuBarPinnedCount"
+        static let menuBarRecentCount = "menuBarRecentCount"
     }
 
     static func register() {
@@ -21,6 +23,8 @@ enum Defaults {
             Keys.shelfHeight: 320.0,
             Keys.compactMode: false,
             Keys.restoreClipboardAfterPaste: false,
+            Keys.menuBarPinnedCount: 5,
+            Keys.menuBarRecentCount: 10,
         ])
     }
 
@@ -47,6 +51,16 @@ enum Defaults {
     static var restoreClipboardAfterPaste: Bool {
         get { UserDefaults.standard.bool(forKey: Keys.restoreClipboardAfterPaste) }
         set { UserDefaults.standard.set(newValue, forKey: Keys.restoreClipboardAfterPaste) }
+    }
+
+    static var menuBarPinnedCount: Int {
+        get { UserDefaults.standard.integer(forKey: Keys.menuBarPinnedCount) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.menuBarPinnedCount) }
+    }
+
+    static var menuBarRecentCount: Int {
+        get { UserDefaults.standard.integer(forKey: Keys.menuBarRecentCount) }
+        set { UserDefaults.standard.set(newValue, forKey: Keys.menuBarRecentCount) }
     }
 }
 

@@ -85,6 +85,34 @@ Format: symptom → cause → fix.
   prefer explicit per-item commands or write an actual `.sh` file (compound one-liners
   with redirects also parsed badly in the interactive zsh).
 
+## SwiftData traps
+
+### Test process crashes (EXC_BREAKPOINT inside SwiftData) with no assertion failure
+- **Symptom**: Swift Testing output even claims suites "passed", but xcodebuild reports
+  the tests failed; the crash report points at your test helper.
+- **Cause 1**: using a `ModelContext` after its `ModelContainer` deallocated —
+  `mainContext` does **not** keep the container alive. A helper like
+  `func makeContext() -> ModelContext { try Container(...).mainContext }` is a crash.
+- **Cause 2**: assigning a relationship (`item.pinboard = board`) on a model that
+  hasn't been `context.insert`ed yet.
+- **Fix**: hold the container for the whole test scope and insert models before
+  linking them (see `QuickMenuQueryTests`).
+
+## SwiftUI ↔ AppKit boundary traps
+
+### MenuBarExtra cannot tell click / hold / right-click apart
+- **Symptom**: no way to give the menu bar icon different menus per gesture.
+- **Fix**: manage an `NSStatusItem` directly (`StatusItemController`): action on
+  `[.leftMouseDown, .rightMouseDown]`, hold detected by synchronously draining
+  `NSApp.nextEvent(matching: [.leftMouseUp, ...], mode: .eventTracking)` against a
+  deadline, menus shown by attaching to `statusItem.menu` + `performClick`, detached
+  in `menuDidClose` (async — clearing during tracking teardown is unsafe).
+- **Knock-on effect**: with no SwiftUI menu there is nowhere to put `SettingsLink`,
+  and the SwiftUI `Settings` scene **cannot be opened from AppKit**
+  (`showSettingsWindow:` has been dead since macOS 14). CmdV hosts SettingsView in
+  its own `SettingsWindowController` instead. A SwiftUI `App` still needs one scene:
+  a never-inserted `MenuBarExtra(isInserted: .constant(false))` placeholder.
+
 ## Runtime logic traps
 
 ### Paste Stack triggers itself in an infinite loop
