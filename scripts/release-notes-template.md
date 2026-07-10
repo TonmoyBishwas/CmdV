@@ -15,6 +15,7 @@ A free, open-source clipboard manager for Apple Silicon Macs running macOS 26+, 
 
 ### Highlights
 
+- 🖱️ Menu bar quick copy: click the icon for your pinned + recent items (one click copies); hold or right-click for the options menu; list sizes configurable in Settings
 - 📋 Automatic clipboard history — text, links, images, files, colors, code
 - 🔍 Instant search (including text inside screenshots, via on-device OCR) and type filters
 - 📌 Pinboards for snippets you want to keep forever
